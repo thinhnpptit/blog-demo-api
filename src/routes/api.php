@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/register', 'ApiUserController@register');
-Route::post('/login', 'ApiUserController@login');
-Route::get('/user', 'ApiUserController@userInfo')->middleware('auth:api');
-Route::resource('/post', 'ApiPostController')->middleware('auth:api');
+Route::middleware('cors')->group(function(){
+    Route::post('/register', 'ApiUserController@register');
+    Route::post('/login', 'ApiUserController@login');
+    Route::get('/user', 'ApiUserController@userInfo')->middleware('auth:api');
+    Route::resource('/post', 'ApiPostController')->middleware('auth:api');
+});
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
